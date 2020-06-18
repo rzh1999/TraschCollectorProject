@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TrashCollector.Controllers
 {
     [Authorize(Roles = "Customer")]
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         // GET: Customer
         public ActionResult Index()
