@@ -1,0 +1,94 @@
+﻿@model TrashCollector.Models.CustomersModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CustomersModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="firstName" class="control-label"></label>
+                <input asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lastName" class="control-label"></label>
+                <input asp-for="lastName" class="form-control" />
+                <span asp-validation-for="lastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode" class="control-label"></label>
+                <input asp-for="ZipCode" class="form-control" />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelephoneNumber" class="control-label"></label>
+                <input asp-for="TelephoneNumber" class="form-control" />
+                <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollectionFee" class="control-label"></label>
+                <input asp-for="CollectionFee" class="form-control" />
+                <span asp-validation-for="CollectionFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PickUpDay" class="control-label"></label>
+                <input asp-for="PickUpDay" class="form-control" />
+                <span asp-validation-for="PickUpDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OneTimeDate" class="control-label"></label>
+                <input asp-for="OneTimeDate" class="form-control" />
+                <span asp-validation-for="OneTimeDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SuspendStart" class="control-label"></label>
+                <input asp-for="SuspendStart" class="form-control" />
+                <span asp-validation-for="SuspendStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SuspendEnd" class="control-label"></label>
+                <input asp-for="SuspendEnd" class="form-control" />
+                <span asp-validation-for="SuspendEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SuspendService" /> @Html.DisplayNameFor(model => model.SuspendService)
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

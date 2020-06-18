@@ -1,20 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TrashCollector.Data;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     [Authorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
-        // GET: Customer
-        public ActionResult Index()
+        private ApplicationDbContext _context;
+
+        public CustomersController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        // GET: Customer
+        public ActionResult Index(CustomersModel customersModel)
+        {
+            
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+
+            return View(customer);
         }
 
         // GET: Customer/Details/5
@@ -32,12 +50,14 @@ namespace TrashCollector.Controllers
         // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CustomersModel customersModel)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customersModel.IdentityUserId = userId;
+                _context.Customers.Add(customersModel);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

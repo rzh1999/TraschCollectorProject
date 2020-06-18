@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
-namespace TrashCollector.Data.Migrations
+namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200618173512_Role")]
-    partial class Role
+    [Migration("20200618214609_collectionfeenuke6")]
+    partial class collectionfeenuke6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,16 +50,16 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6610a941-bb4e-4bfc-a2b2-f6a04b9c6c9e",
-                            ConcurrencyStamp = "981e4274-1f84-47a7-86ea-493db9ac2747",
-                            Name = "CUSTOMER",
+                            Id = "163a4496-e4ac-4694-a934-9b734ee21904",
+                            ConcurrencyStamp = "fc214aca-c47d-4365-abfa-1b1ec13c5b20",
+                            Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "c386c2b4-fc46-4bfa-8fda-0da825bfa1ff",
-                            ConcurrencyStamp = "ea037bf2-0dd7-4223-8830-681e1daef4bb",
-                            Name = "EMPLOYEE",
+                            Id = "002ac622-c573-4e2d-86f0-be8ba66aebb6",
+                            ConcurrencyStamp = "69ebfc23-cee5-48df-a72a-b9bd06d945cc",
+                            Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
                 });
@@ -233,6 +233,62 @@ namespace TrashCollector.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TrashCollector.Models.CustomersModel", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CollectionFee")
+                        .HasColumnType("float");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("OneTimeDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PickUpDay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SuspendEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("SuspendService")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("SuspendStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TelephoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -282,6 +338,13 @@ namespace TrashCollector.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TrashCollector.Models.CustomersModel", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
                 });
 #pragma warning restore 612, 618
         }
