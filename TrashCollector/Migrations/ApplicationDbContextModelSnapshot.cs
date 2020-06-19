@@ -48,15 +48,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "163a4496-e4ac-4694-a934-9b734ee21904",
-                            ConcurrencyStamp = "fc214aca-c47d-4365-abfa-1b1ec13c5b20",
+                            Id = "c9c7dc64-f709-47cc-9de4-db26c92cea05",
+                            ConcurrencyStamp = "89b2fa01-e5ee-45b9-ad6e-dc8801a0b403",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "002ac622-c573-4e2d-86f0-be8ba66aebb6",
-                            ConcurrencyStamp = "69ebfc23-cee5-48df-a72a-b9bd06d945cc",
+                            Id = "ed582584-da36-4d02-9f27-3e68c7cd4d97",
+                            ConcurrencyStamp = "357f0a15-b10a-4e67-a9c5-e32eaca132c3",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -237,6 +237,9 @@ namespace TrashCollector.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("AccountBalance")
+                        .HasColumnType("float");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");

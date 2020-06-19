@@ -49,6 +49,9 @@ namespace TrashCollector.Models
 
         [Display(Name = "Suspend Service:")]
         public bool SuspendService { get; set; }
+
+        [Display(Name = "Account Balance")]
+        public double AccountBalance { get; set; }
         
         [NotMapped]
         public DayOfWeek DayOfWeek { get; }
