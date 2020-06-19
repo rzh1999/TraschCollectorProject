@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
@@ -34,7 +35,30 @@ namespace TrashCollector.Controllers
 
             return View(customer);
         }
+        
+        //Get Customer Pick Up
+        public ActionResult CustomerPickUp(string id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            return View(customer);
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CustomerPickUp(CustomersModel customersModel)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            customer.PickUpDay = customersModel.PickUpDay;
+            
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {

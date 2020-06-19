@@ -49,7 +49,9 @@ namespace TrashCollector.Models
 
         [Display(Name = "Suspend Service:")]
         public bool SuspendService { get; set; }
-
+        
+        [NotMapped]
+        public DayOfWeek DayOfWeek { get; }
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
