@@ -17,6 +17,7 @@ namespace TrashCollector.Data
 
         public DbSet<CustomersModel> Customers { get; set; }
 
+        public DbSet<EmployeesModel> Employees { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -30,5 +31,7 @@ namespace TrashCollector.Data
                                                 }
                                                 );
         }
+
+       
     }
 }

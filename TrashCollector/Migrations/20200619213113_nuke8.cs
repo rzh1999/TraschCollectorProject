@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollector.Migrations
 {
-    public partial class collectionfeenuke13 : Migration
+    public partial class nuke8 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -167,7 +167,7 @@ namespace TrashCollector.Migrations
                     TelephoneNumber = table.Column<string>(nullable: true),
                     CollectionFee = table.Column<double>(nullable: false),
                     PickUpDay = table.Column<string>(nullable: true),
-                    OneTimeDate = table.Column<DateTime>(nullable: true),
+                    OneTimeDate = table.Column<string>(nullable: true),
                     SuspendStart = table.Column<DateTime>(nullable: true),
                     SuspendEnd = table.Column<DateTime>(nullable: true),
                     SuspendService = table.Column<bool>(nullable: false),
@@ -185,15 +185,37 @@ namespace TrashCollector.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c9c7dc64-f709-47cc-9de4-db26c92cea05", "89b2fa01-e5ee-45b9-ad6e-dc8801a0b403", "Customer", "CUSTOMER" });
+            migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    EmployeeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<string>(nullable: true),
+                    IdentityUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
+                    table.ForeignKey(
+                        name: "FK_Employees_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ed582584-da36-4d02-9f27-3e68c7cd4d97", "357f0a15-b10a-4e67-a9c5-e32eaca132c3", "Employee", "EMPLOYEE" });
+                values: new object[] { "e03667f9-91e0-44aa-9475-76a097593562", "d990803d-2823-48b9-8823-798aa8196806", "Customer", "CUSTOMER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "de8b059b-a2ff-44a9-8cc2-d8d7a2ea8bfb", "eed59b69-9d6c-485a-9851-99b178edf4d9", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -238,6 +260,11 @@ namespace TrashCollector.Migrations
                 name: "IX_Customers_IdentityUserId",
                 table: "Customers",
                 column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_IdentityUserId",
+                table: "Employees",
+                column: "IdentityUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -259,6 +286,9 @@ namespace TrashCollector.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
