@@ -67,7 +67,17 @@ namespace TrashCollector.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-  
+
+        public ActionResult CustomerBalance(string id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            if (customer == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+        }
         //Get Customer Pick Up
         public ActionResult CustomerPickUp(string id)
         {
