@@ -1,13 +1,13 @@
 ﻿@model TrashCollector.Models.CustomersModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Customer Info";
 }
 
-<h1>Index</h1>
+    <h4>Welcome Back  @Html.DisplayFor(model => model.firstName)   @Html.DisplayFor(model => model.lastName)</h4>
 
 <div>
-    <h4>CustomersModel</h4>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -93,6 +93,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CustomerId">Edit</a> |
+    <a 
     <a asp-action="Index">Back to List</a>
 </div>
