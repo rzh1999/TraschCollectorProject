@@ -137,15 +137,23 @@ namespace TrashCollector.Controllers
             }
         }
 
-        public  async Task<IActionResult> GetCustomerDay(string EmpSearch)
+        public  async Task<IActionResult> GetCustomerDay(string EmpSearch, EmployeesModel employeesModel)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            employeesModel = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            DateTime dateTime = DateTime.Now;
+            var date = dateTime.ToString("dddd");
             ViewData["GetCustomerDay"] = EmpSearch;
-            var empquery = from x in _context.Customers select x;
+            // var empquery = from x in _context.Customers  select x;
+            //var empquery = _context.Customers.Where(c => c.ZipCode == employeesModel.ZipCode).ToList();
+            var empquery = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employeesModel.ZipCode && c.SuspendService != true || c.OneTimeDate == dateTime).ToList();
+            empquery.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
             if (!String.IsNullOrEmpty(EmpSearch))
             {
-                empquery = empquery.Where(x => x.PickUpDay.Contains(EmpSearch));
+                empquery = empquery.Where(x => x.PickUpDay.Contains(EmpSearch)).ToList();
+               
             }
-            return View(await empquery.AsNoTracking().ToListAsync());
+            return View(empquery);
         }
 
       

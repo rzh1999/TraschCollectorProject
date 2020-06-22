@@ -79,15 +79,10 @@ namespace TrashCollector.Controllers
             customer.SuspendStart = customersModel.SuspendStart;
             customer.SuspendEnd = customersModel.SuspendEnd;
 
-            if (customersModel.SuspendService == true)
-            {
-                return View();
-            }
-            else
-            {
+            
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
+            
         }
 
         public ActionResult CustomerBalance(string id)
