@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using TrashCollector.Data;
 using TrashCollector.Models;
@@ -45,9 +46,11 @@ namespace TrashCollector.Controllers
             {
 
                 
-                var myCustomers = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employee.ZipCode && c.SuspendService != true || c.OneTimeDate == DateTime.Now ).ToList();
-
-                viewModel.Customers = myCustomers;
+                var myCustomers = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employee.ZipCode && c.SuspendService != true  || c.OneTimeDate == dateTime).ToList();
+                myCustomers.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
+                
+                //viewModel.Customers = myCustomers;
+                //viewModel.Customers = filteredCustomers;
                 return View(myCustomers);
             }
             catch

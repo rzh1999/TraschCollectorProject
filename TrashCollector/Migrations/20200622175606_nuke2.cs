@@ -168,8 +168,8 @@ namespace TrashCollector.Migrations
                     CollectionFee = table.Column<double>(nullable: false),
                     PickUpDay = table.Column<string>(nullable: true),
                     OneTimeDate = table.Column<DateTime>(type: "date", nullable: true),
-                    SuspendStart = table.Column<DateTime>(nullable: true),
-                    SuspendEnd = table.Column<DateTime>(nullable: true),
+                    SuspendStart = table.Column<DateTime>(type: "date", nullable: true),
+                    SuspendEnd = table.Column<DateTime>(type: "date", nullable: true),
                     SuspendService = table.Column<bool>(nullable: false),
                     AccountBalance = table.Column<double>(nullable: false),
                     ConfirmPickUp = table.Column<bool>(nullable: false),
@@ -211,12 +211,12 @@ namespace TrashCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e0996a65-3cad-4363-98e1-a99a7b0d0f3b", "652978ab-feef-4a21-b1c6-e0909ce6ec90", "Customer", "CUSTOMER" });
+                values: new object[] { "c115f258-f46c-4e6f-bc5c-7cf63e4e15f2", "0833beea-7f3d-4cf9-8f37-6f6d8459db0a", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a18a0927-fc67-4b86-8dae-059e99fc6ca8", "6ed5ca06-fcc5-4361-a8bc-0c194820dee7", "Employee", "EMPLOYEE" });
+                values: new object[] { "7d94eda2-ffcf-40c0-8460-92d69fcae0f2", "44dce553-b623-49d8-a055-e3f4c27f31b0", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

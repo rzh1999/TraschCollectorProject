@@ -48,15 +48,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e0996a65-3cad-4363-98e1-a99a7b0d0f3b",
-                            ConcurrencyStamp = "652978ab-feef-4a21-b1c6-e0909ce6ec90",
+                            Id = "c115f258-f46c-4e6f-bc5c-7cf63e4e15f2",
+                            ConcurrencyStamp = "0833beea-7f3d-4cf9-8f37-6f6d8459db0a",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "a18a0927-fc67-4b86-8dae-059e99fc6ca8",
-                            ConcurrencyStamp = "6ed5ca06-fcc5-4361-a8bc-0c194820dee7",
+                            Id = "7d94eda2-ffcf-40c0-8460-92d69fcae0f2",
+                            ConcurrencyStamp = "44dce553-b623-49d8-a055-e3f4c27f31b0",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -266,13 +266,13 @@ namespace TrashCollector.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("SuspendEnd")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<bool>("SuspendService")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("SuspendStart")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("TelephoneNumber")
                         .HasColumnType("nvarchar(max)");

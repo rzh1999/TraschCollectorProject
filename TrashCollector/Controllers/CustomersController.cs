@@ -79,7 +79,7 @@ namespace TrashCollector.Controllers
             customer.SuspendStart = customersModel.SuspendStart;
             customer.SuspendEnd = customersModel.SuspendEnd;
 
-            if (customersModel.SuspendService == false)
+            if (customersModel.SuspendService == true)
             {
                 return View();
             }

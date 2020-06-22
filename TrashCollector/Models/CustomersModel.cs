@@ -43,9 +43,11 @@ namespace TrashCollector.Models
         public DateTime? OneTimeDate { get; set; }
 
         [Display(Name = "Suspend Start:")]
+        [Column(TypeName = "date")]
         public DateTime? SuspendStart { get; set; }
 
         [Display(Name = "Suspend End:")]
+        [Column(TypeName = "date")]
         public DateTime? SuspendEnd { get; set; }
 
         [Display(Name = "Suspend Service:")]
