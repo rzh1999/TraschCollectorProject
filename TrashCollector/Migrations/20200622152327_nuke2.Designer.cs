@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200619213113_nuke8")]
-    partial class nuke8
+    [Migration("20200622152327_nuke2")]
+    partial class nuke2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e03667f9-91e0-44aa-9475-76a097593562",
-                            ConcurrencyStamp = "d990803d-2823-48b9-8823-798aa8196806",
+                            Id = "37b29051-7648-4e30-b142-a1034b0ba1b8",
+                            ConcurrencyStamp = "dba9ff4e-59ae-478f-8167-1e971faa090f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "de8b059b-a2ff-44a9-8cc2-d8d7a2ea8bfb",
-                            ConcurrencyStamp = "eed59b69-9d6c-485a-9851-99b178edf4d9",
+                            Id = "4fe78475-5d0f-4751-8f8f-26ecd801a983",
+                            ConcurrencyStamp = "f401d1ad-b86f-4ece-afa0-615d9d4ec894",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -251,6 +251,9 @@ namespace TrashCollector.Migrations
 
                     b.Property<double>("CollectionFee")
                         .HasColumnType("float");
+
+                    b.Property<bool>("ConfirmPickUp")
+                        .HasColumnType("bit");
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");

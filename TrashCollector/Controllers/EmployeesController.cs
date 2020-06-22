@@ -142,5 +142,28 @@ namespace TrashCollector.Controllers
             }
             return View(await empquery.AsNoTracking().ToListAsync());
         }
+
+      
+        public ActionResult CompletePickUp(int id)
+        {
+            if (id != 0)
+            {
+                
+                try
+                {
+                    var customer = _context.Customers.Where(x => x.CustomerId == id).SingleOrDefault();
+                    customer.AccountBalance += customer.CollectionFee;
+                    customer.ConfirmPickUp = true;
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(GetCustomerDay));
+                }
+                catch
+                {
+                    return View();
+                }
+              
+            }
+            return RedirectToAction(nameof(GetCustomerDay));
+        }
     }
 }

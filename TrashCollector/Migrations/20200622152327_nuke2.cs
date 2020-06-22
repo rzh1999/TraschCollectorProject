@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollector.Migrations
 {
-    public partial class nuke8 : Migration
+    public partial class nuke2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -172,6 +172,7 @@ namespace TrashCollector.Migrations
                     SuspendEnd = table.Column<DateTime>(nullable: true),
                     SuspendService = table.Column<bool>(nullable: false),
                     AccountBalance = table.Column<double>(nullable: false),
+                    ConfirmPickUp = table.Column<bool>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -210,12 +211,12 @@ namespace TrashCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e03667f9-91e0-44aa-9475-76a097593562", "d990803d-2823-48b9-8823-798aa8196806", "Customer", "CUSTOMER" });
+                values: new object[] { "37b29051-7648-4e30-b142-a1034b0ba1b8", "dba9ff4e-59ae-478f-8167-1e971faa090f", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "de8b059b-a2ff-44a9-8cc2-d8d7a2ea8bfb", "eed59b69-9d6c-485a-9851-99b178edf4d9", "Employee", "EMPLOYEE" });
+                values: new object[] { "4fe78475-5d0f-4751-8f8f-26ecd801a983", "f401d1ad-b86f-4ece-afa0-615d9d4ec894", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

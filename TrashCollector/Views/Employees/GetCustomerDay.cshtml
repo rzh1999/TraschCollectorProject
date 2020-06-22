@@ -60,7 +60,7 @@
                 @Html.DisplayNameFor(model => model.AccountBalance)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
+                @Html.DisplayNameFor(model => model.ConfirmPickUp)
             </th>
             <th></th>
         </tr>
@@ -112,12 +112,11 @@
                     @Html.DisplayFor(modelItem => item.AccountBalance)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                    @Html.DisplayFor(modelItem => item.ConfirmPickUp)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                    <a asp-action="CompletePickUp" asp-route-id="@item.CustomerId">Complete Pick Up</a>
+                   
                 </td>
             </tr>
         }

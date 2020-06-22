@@ -52,9 +52,10 @@ namespace TrashCollector.Models
 
         [Display(Name = "Account Balance")]
         public double AccountBalance { get; set; }
-        
-        [NotMapped]
-        public DayOfWeek DayOfWeek { get; }
+
+        [Display(Name = "Confirm Pick Up:")]
+        public bool ConfirmPickUp { get; set; }
+
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
