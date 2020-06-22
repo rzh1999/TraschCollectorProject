@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<TrashCollector.Models.CustomersModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Customer Pickups";
 }
 
-<h1>Index</h1>
+    <h4>
+        Customer Pickups Scheduled For @Html.TextBox("DateCreated",
+DateTime.Today.ToString("MM/dd/yyyy"), new { @readonly = "readonly", @style = "border: none;" })</h4>
 
 
 <table class="table">
@@ -40,21 +42,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.OneTimeDate)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.SuspendStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SuspendEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SuspendService)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccountBalance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
-            </th>*@
+           
             <th></th>
         </tr>
     </thead>
@@ -91,26 +79,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OneTimeDate)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.SuspendStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SuspendEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SuspendService)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountBalance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-            </td>*@
-            @*<td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
-            </td>*@
+            
         </tr>
 }
     </tbody>
