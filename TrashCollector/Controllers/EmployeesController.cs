@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
@@ -83,7 +85,7 @@ namespace TrashCollector.Controllers
                 return View();
             }
         }
-
+       
         // GET: Employees/Edit/5
         public ActionResult Edit(int id)
         {
@@ -128,6 +130,17 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
+        }
+
+        public  async Task<IActionResult> GetCustomerDay(string EmpSearch)
+        {
+            ViewData["GetCustomerDay"] = EmpSearch;
+            var empquery = from x in _context.Customers select x;
+            if (!String.IsNullOrEmpty(EmpSearch))
+            {
+                empquery = empquery.Where(x => x.PickUpDay.Contains(EmpSearch));
+            }
+            return View(await empquery.AsNoTracking().ToListAsync());
         }
     }
 }

@@ -30,6 +30,7 @@ namespace TrashCollector.Data
                                                 NormalizedName = "EMPLOYEE"
                                                 }
                                                 );
+          
         }
 
        
