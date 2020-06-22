@@ -35,7 +35,7 @@ namespace TrashCollector.Controllers
 
             DateTime dateTime = DateTime.Now;
             var date =  dateTime.ToString("dddd");
-
+          
             
             if (employee == null)
             {
@@ -43,7 +43,9 @@ namespace TrashCollector.Controllers
             }
             try
             {
-                var myCustomers = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employee.ZipCode && c.SuspendService != true || c.OneTimeDate == date).ToList();
+
+                
+                var myCustomers = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employee.ZipCode && c.SuspendService != true || c.OneTimeDate == DateTime.Now ).ToList();
 
                 viewModel.Customers = myCustomers;
                 return View(myCustomers);

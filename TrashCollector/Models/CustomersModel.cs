@@ -39,7 +39,8 @@ namespace TrashCollector.Models
         public string PickUpDay { get; set; }
 
         [Display(Name = "One Time Pick Up:")]
-        public string OneTimeDate { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? OneTimeDate { get; set; }
 
         [Display(Name = "Suspend Start:")]
         public DateTime? SuspendStart { get; set; }

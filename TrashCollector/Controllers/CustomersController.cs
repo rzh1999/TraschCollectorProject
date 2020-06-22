@@ -35,8 +35,30 @@ namespace TrashCollector.Controllers
 
             return View(customer);
         }
-        
-        public ActionResult SetSuspendDate(string id)
+        public ActionResult SetPickUpDate(string id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            return View(customer);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetPickUpDate(CustomersModel customersModel)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            customer.OneTimeDate = customersModel.OneTimeDate;
+
+           
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+           
+        }
+            public ActionResult SetSuspendDate(string id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
