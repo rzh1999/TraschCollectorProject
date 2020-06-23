@@ -4,9 +4,10 @@
     ViewData["Title"] = "Customer Pickups";
 }
 
-    <h4>
-        Customer Pickups Scheduled For @Html.TextBox("DateCreated",
-DateTime.Today.ToString("MM/dd/yyyy"), new { @readonly = "readonly", @style = "border: none;" })</h4>
+<h4>
+    Customer Pickups Scheduled For @Html.TextBox("DateCreated",
+DateTime.Today.ToString("MM/dd/yyyy"), new { @readonly = "readonly", @style = "border: none;" })
+</h4>
 
 
 <table class="table">
@@ -42,12 +43,13 @@ DateTime.Today.ToString("MM/dd/yyyy"), new { @readonly = "readonly", @style = "b
             <th>
                 @Html.DisplayNameFor(model => model.OneTimeDate)
             </th>
-           
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.firstName)
@@ -79,8 +81,12 @@ DateTime.Today.ToString("MM/dd/yyyy"), new { @readonly = "readonly", @style = "b
             <td>
                 @Html.DisplayFor(modelItem => item.OneTimeDate)
             </td>
-            
+            <td>
+                <a asp-action="DisplayMap" asp-route-id="@item.CustomerId">Display Map</a>
+
+            </td>
+
         </tr>
-}
+        }
     </tbody>
 </table>

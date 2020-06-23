@@ -180,6 +180,13 @@ namespace TrashCollector.Controllers
             return RedirectToAction(nameof(GetCustomerDay));
         }
 
-       
+        public ActionResult DisplayMap(int id)
+        {
+            CustomerEmployeeViewModel viewModel = new CustomerEmployeeViewModel();
+
+            var customer = _context.Customers.Where(x => x.CustomerId == id).SingleOrDefault();
+           
+            return View(customer);
+        }
     }
 }
