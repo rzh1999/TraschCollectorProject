@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200622175606_nuke2")]
-    partial class nuke2
+    [Migration("20200623184058_nuke1")]
+    partial class nuke1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c115f258-f46c-4e6f-bc5c-7cf63e4e15f2",
-                            ConcurrencyStamp = "0833beea-7f3d-4cf9-8f37-6f6d8459db0a",
+                            Id = "50c5d04a-210f-4f49-8b14-dd8d3b6f5375",
+                            ConcurrencyStamp = "9b97f95f-40b9-4e0e-8953-0e0ff78aa7cb",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "7d94eda2-ffcf-40c0-8460-92d69fcae0f2",
-                            ConcurrencyStamp = "44dce553-b623-49d8-a055-e3f4c27f31b0",
+                            Id = "a02ab9c0-3ae8-4472-b453-e8bdc82df849",
+                            ConcurrencyStamp = "1a2610c0-dd43-4f62-a430-6604afbf69b6",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -257,6 +257,12 @@ namespace TrashCollector.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Lattitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("OneTimeDate")
                         .HasColumnType("date");

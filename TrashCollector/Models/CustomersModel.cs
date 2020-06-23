@@ -59,6 +59,11 @@ namespace TrashCollector.Models
         [Display(Name = "Confirm Pick Up:")]
         public bool ConfirmPickUp { get; set; }
 
+        
+        public double Lattitude { get; set; }
+
+        public double Longitude { get; set; }
+
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }

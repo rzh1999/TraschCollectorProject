@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
@@ -177,5 +179,7 @@ namespace TrashCollector.Controllers
             }
             return RedirectToAction(nameof(GetCustomerDay));
         }
+
+       
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
@@ -133,8 +135,21 @@ namespace TrashCollector.Controllers
         // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CustomersModel customersModel)
+        public async Task<ActionResult> Create(CustomersModel customersModel)
         {
+            HttpClient httpClient = new HttpClient();
+
+            var url =
+                string.Format(
+                    "https://maps.googleapis.com/maps/api/geocode/json?address={0},+{1},+{2}&key=AIzaSyAh0UnA6dB0NIZVjMy2BCMjXd7QmR3GON4",
+                    customersModel.Address, customersModel.City, customersModel.City);
+            var jsonResponse = await httpClient.GetStringAsync(url);
+            var parsedJson = JObject.Parse(jsonResponse);
+            var results = parsedJson["results"];
+            var latitude = (double)results[0]["geometry"]["location"]["lat"];
+            var longitude = (double)results[0]["geometry"]["location"]["lng"];
+            customersModel.Lattitude = latitude;
+            customersModel.Longitude = longitude;
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
