@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Display Customer Map";
+    double lat = Model.Lattitude;
+    double lng = Model.Longitude;
 }
 
     <h4>Displaying Map For Customer @Html.DisplayFor(model => model.firstName)  @Html.DisplayFor(model => model.lastName)</h4>
@@ -34,10 +36,17 @@
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
+    let lat = @lat;
+    let lng = @lng;
+    
+  var uluru = {lat: -29.344, lng: 123.036};
+    //var uluru = { lat: lat, lng: lng };
+    uluru.lat = lat;
+    uluru.lng = lng;
+    
   // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+    var map = new google.maps.Map(
+        document.getElementById('map'), { zoom: 4, center: uluru });
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: uluru, map: map});
 }
