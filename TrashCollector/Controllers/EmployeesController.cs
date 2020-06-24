@@ -112,7 +112,7 @@ namespace TrashCollector.Controllers
             }
             catch
             {
-                return View("Index")
+                return View("Index");
             }
         }
 
