@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -59,10 +60,13 @@ namespace TrashCollector.Models
         [Display(Name = "Confirm Pick Up:")]
         public bool ConfirmPickUp { get; set; }
 
-        
+
         public double Lattitude { get; set; }
 
         public double Longitude { get; set; }
+
+        [NotMapped]
+        public SelectList Days {get; set;}
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }

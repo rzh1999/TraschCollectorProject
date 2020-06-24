@@ -54,7 +54,8 @@
             </div>
             <div class="form-group">
             <label asp-for="PickUpDay" class="control-label"></label>
-            <input asp-for="PickUpDay" class="form-control" />
+            @*<input asp-for="PickUpDay" class="form-control" />*@
+                <select asp-for="PickUpDay" asp-items="@Model.Days"></select>
             <span asp-validation-for="PickUpDay" class="text-danger"></span>
         </div>
             @*<label asp-for="PickUpDay" class="control-label"></label>

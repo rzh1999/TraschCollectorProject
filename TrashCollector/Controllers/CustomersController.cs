@@ -125,7 +125,9 @@ namespace TrashCollector.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+            CustomersModel customersModel = new CustomersModel();
+            customersModel.Days = new SelectList(Enum.GetValues(typeof(DayOfWeek)));
+            return View(customersModel);
         }
 
         // POST: Customer/Create
@@ -139,13 +141,18 @@ namespace TrashCollector.Controllers
                 string.Format(
                     "https://maps.googleapis.com/maps/api/geocode/json?address={0},+{1},+{2}&key=AIzaSyAh0UnA6dB0NIZVjMy2BCMjXd7QmR3GON4",
                     customersModel.Address, customersModel.City, customersModel.City);
+
             var jsonResponse = await httpClient.GetStringAsync(url);
+
             var parsedJson = JObject.Parse(jsonResponse);
+
             var results = parsedJson["results"];
             var latitude = (double)results[0]["geometry"]["location"]["lat"];
             var longitude = (double)results[0]["geometry"]["location"]["lng"];
+
             customersModel.Lattitude = latitude;
             customersModel.Longitude = longitude;
+
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
