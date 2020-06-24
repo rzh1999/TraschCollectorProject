@@ -1,0 +1,117 @@
+﻿@model TrashCollector.Models.CustomersModel
+
+@{
+    ViewData["Title"] = "CustomersByPickUpDay";
+}
+
+<h1>CustomersByPickUpDay</h1>
+
+<div>
+    <h4>CustomersModel</h4>
+    <hr />
+    <form asp-action="CustomersByPickUpDay" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="CustomersByPickUpDay">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TelephoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TelephoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CollectionFee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CollectionFee)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PickUpDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PickUpDay)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OneTimeDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OneTimeDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SuspendStart)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SuspendStart)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SuspendEnd)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SuspendEnd)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SuspendService)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SuspendService)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountBalance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountBalance)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdentityUser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdentityUser.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CustomerId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

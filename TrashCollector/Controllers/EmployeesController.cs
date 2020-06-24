@@ -100,12 +100,13 @@ namespace TrashCollector.Controllers
             DateTime dateTime = DateTime.Now;
             var date = dateTime.ToString("dddd");
             ViewData["GetCustomerDay"] = EmpSearch;
-            
-            
+
+           
             var empquery = _context.Customers.Where(c => c.ZipCode == employeesModel.ZipCode && c.SuspendService != true || c.OneTimeDate == dateTime).ToList();
             empquery.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
             if (!String.IsNullOrEmpty(EmpSearch))
             {
+                EmpSearch = DayOfWeekFormatter.FormatDay(EmpSearch);
                 empquery = empquery.Where(x => x.PickUpDay.Contains(EmpSearch)).ToList();
                
             }
