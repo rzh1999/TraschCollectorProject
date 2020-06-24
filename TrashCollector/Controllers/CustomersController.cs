@@ -103,16 +103,22 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SetSuspendDate(CustomersModel customersModel)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            customer.SuspendService = customersModel.SuspendService;
-            customer.SuspendStart = customersModel.SuspendStart;
-            customer.SuspendEnd = customersModel.SuspendEnd;
+            try
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                customer.SuspendService = customersModel.SuspendService;
+                customer.SuspendStart = customersModel.SuspendStart;
+                customer.SuspendEnd = customersModel.SuspendEnd;
 
-            
+
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         public ActionResult CustomerBalance(string id)
