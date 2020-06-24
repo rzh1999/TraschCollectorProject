@@ -147,7 +147,8 @@ namespace TrashCollector.Controllers
             var date = dateTime.ToString("dddd");
             ViewData["GetCustomerDay"] = EmpSearch;
             
-            var empquery = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employeesModel.ZipCode && c.SuspendService != true || c.OneTimeDate == dateTime).ToList();
+            
+            var empquery = _context.Customers.Where(c => c.ZipCode == employeesModel.ZipCode && c.SuspendService != true || c.OneTimeDate == dateTime).ToList();
             empquery.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
             if (!String.IsNullOrEmpty(EmpSearch))
             {
