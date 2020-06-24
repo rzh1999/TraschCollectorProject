@@ -65,13 +65,20 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SetPickUpDate(CustomersModel customersModel)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            customer.OneTimeDate = customersModel.OneTimeDate;
+            try
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                customer.OneTimeDate = customersModel.OneTimeDate;
 
-           
+
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
            
         }
             public ActionResult SetSuspendDate(string id)
