@@ -198,8 +198,8 @@ namespace TrashCollector.Controllers
 
             var url =
                 string.Format(
-                    "https://maps.googleapis.com/maps/api/geocode/json?address={0},+{1},+{2}&key=AIzaSyAh0UnA6dB0NIZVjMy2BCMjXd7QmR3GON4",
-                    customersModel.Address, customersModel.City, customersModel.State);
+                    "https://maps.googleapis.com/maps/api/geocode/json?address={0},+{1},+{2}&key={3}",
+                    customersModel.Address, customersModel.City, customersModel.State, ApiKeys.googleApi);
 
             
             HttpResponseMessage response =  await httpClient.GetAsync(url);
