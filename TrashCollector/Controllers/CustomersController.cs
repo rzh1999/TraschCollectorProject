@@ -141,13 +141,20 @@ namespace TrashCollector.Controllers
         //Get Customer Pick Up
         public ActionResult CustomerPickUp(string id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            if (customer == null)
+            try
             {
-                return RedirectToAction("Create");
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                if (customer == null)
+                {
+                    return RedirectToAction("Create");
+                }
+                return View(customer);
             }
-            return View(customer);
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost]
@@ -156,7 +163,9 @@ namespace TrashCollector.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            customer.PickUpDay = customersModel.PickUpDay;
+            //customer.PickUpDay = customersModel.PickUpDay;
+            string formattedDay = DayOfWeekFormatter.FormatDay(customersModel.PickUpDay);
+            customer.PickUpDay = formattedDay;
             
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));

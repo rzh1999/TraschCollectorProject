@@ -10,10 +10,10 @@ namespace TrashCollector.Controllers
 
         public static string FormatDay(string toformat)
         {
-            string allLower = toformat.ToLower();
-            string firstCapital = char.ToUpper(allLower[0]).ToString();
+            //string allLower = toformat.ToLower();
+            //string firstCapital = char.ToUpper(allLower[0]).ToString();
 
-            return firstCapital; 
+             return char.ToUpper(toformat[0]) + toformat.Substring(1);
         }
     }
 }
