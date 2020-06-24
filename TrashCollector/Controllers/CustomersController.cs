@@ -27,15 +27,22 @@ namespace TrashCollector.Controllers
         // GET: Customer
         public ActionResult Index(CustomersModel customersModel)
         {
-            
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            if (customer == null)
+            try
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                if (customer == null)
+                {
+                    return RedirectToAction("Create");
+                }
+
+                return View(customer);
+            }
+            catch
             {
                 return RedirectToAction("Create");
             }
-
-            return View(customer);
+           
         }
         public ActionResult SetPickUpDate(string id)
         {
