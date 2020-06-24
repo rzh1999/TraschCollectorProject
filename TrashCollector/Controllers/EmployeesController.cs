@@ -48,12 +48,9 @@ namespace TrashCollector.Controllers
             try
             {
 
-                
                 var myCustomers = _context.Customers.Where(c => c.PickUpDay == date && c.ZipCode == employee.ZipCode && c.SuspendService != true  || c.OneTimeDate == dateTime).ToList();
                 myCustomers.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
-                
-                //viewModel.Customers = myCustomers;
-                //viewModel.Customers = filteredCustomers;
+                               
                 return View(myCustomers);
             }
             catch
@@ -101,16 +98,22 @@ namespace TrashCollector.Controllers
             var date = dateTime.ToString("dddd");
             ViewData["GetCustomerDay"] = EmpSearch;
 
-           
-            var empquery = _context.Customers.Where(c => c.ZipCode == employeesModel.ZipCode && c.SuspendService != true || c.OneTimeDate == dateTime).ToList();
-            empquery.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
-            if (!String.IsNullOrEmpty(EmpSearch))
+            try
             {
-                EmpSearch = DayOfWeekFormatter.FormatDay(EmpSearch);
-                empquery = empquery.Where(x => x.PickUpDay.Contains(EmpSearch)).ToList();
-               
+                var empquery = _context.Customers.Where(c => c.ZipCode == employeesModel.ZipCode && c.SuspendService != true || c.OneTimeDate == dateTime).ToList();
+                empquery.RemoveAll(d => d.SuspendStart <= dateTime || d.SuspendEnd >= dateTime);
+                if (!String.IsNullOrEmpty(EmpSearch))
+                {
+                    EmpSearch = DayOfWeekFormatter.FormatDay(EmpSearch);
+                    empquery = empquery.Where(x => x.PickUpDay.Contains(EmpSearch)).ToList();
+
+                }
+                return View(empquery);
             }
-            return View(empquery);
+            catch
+            {
+                return View("Index")
+            }
         }
 
       
