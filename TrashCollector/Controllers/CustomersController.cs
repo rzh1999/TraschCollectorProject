@@ -161,14 +161,21 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CustomerPickUp(CustomersModel customersModel)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            //customer.PickUpDay = customersModel.PickUpDay;
-            string formattedDay = DayOfWeekFormatter.FormatDay(customersModel.PickUpDay);
-            customer.PickUpDay = formattedDay;
-            
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+                string formattedDay = DayOfWeekFormatter.FormatDay(customersModel.PickUpDay);
+                customer.PickUpDay = formattedDay;
+
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
       
         
@@ -177,6 +184,8 @@ namespace TrashCollector.Controllers
         {
             CustomersModel customersModel = new CustomersModel();
             customersModel.Days = new SelectList(Enum.GetValues(typeof(DayOfWeek)));
+            
+            
             return View(customersModel);
         }
 
@@ -190,19 +199,32 @@ namespace TrashCollector.Controllers
             var url =
                 string.Format(
                     "https://maps.googleapis.com/maps/api/geocode/json?address={0},+{1},+{2}&key=AIzaSyAh0UnA6dB0NIZVjMy2BCMjXd7QmR3GON4",
-                    customersModel.Address, customersModel.City, customersModel.City);
+                    customersModel.Address, customersModel.City, customersModel.State);
 
-            var jsonResponse = await httpClient.GetStringAsync(url);
+            
+            HttpResponseMessage response =  await httpClient.GetAsync(url);
 
-            var parsedJson = JObject.Parse(jsonResponse);
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                JObject parsedJson = JObject.Parse(jsonResponse);
 
-            var results = parsedJson["results"];
-            var latitude = (double)results[0]["geometry"]["location"]["lat"];
-            var longitude = (double)results[0]["geometry"]["location"]["lng"];
+                var results = parsedJson["results"];
+                var latitude = (double)results[0]["geometry"]["location"]["lat"];
+                var longitude = (double)results[0]["geometry"]["location"]["lng"];
+                var validAddress = results[0]["geometry"]["location_type"].ToString();
+                
+                if (validAddress == "APPROXIMATE")
+                {
+                    customersModel.Error = "Invalid Address";
+                    return View(customersModel);
+                }
 
-            customersModel.Lattitude = latitude;
-            customersModel.Longitude = longitude;
-
+                customersModel.Lattitude = latitude;
+                customersModel.Longitude = longitude;
+            }
+                
+            
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
