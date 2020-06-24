@@ -83,13 +83,20 @@ namespace TrashCollector.Controllers
         }
             public ActionResult SetSuspendDate(string id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            if (customer == null)
+            try
             {
-                return RedirectToAction("Create");
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                if (customer == null)
+                {
+                    return RedirectToAction("Create");
+                }
+                return View(customer);
             }
-            return View(customer);
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
