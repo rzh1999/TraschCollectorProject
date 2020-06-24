@@ -82,8 +82,8 @@ DateTime.Today.ToString("MM/dd/yyyy"), new { @readonly = "readonly", @style = "b
                 @Html.DisplayFor(modelItem => item.OneTimeDate)
             </td>
             <td>
-                <a asp-action="DisplayMap" asp-route-id="@item.CustomerId">Display Map</a>
-
+                <a asp-action="DisplayMap" asp-route-id="@item.CustomerId">Display Map</a> |
+                <a asp-action="CompletePickUp" asp-route-id="@item.CustomerId">Complete PickUp</a>
             </td>
 
         </tr>
