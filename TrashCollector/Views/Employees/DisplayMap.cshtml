@@ -4,6 +4,7 @@
     ViewData["Title"] = "Display Customer Map";
     double lat = Model.Lattitude;
     double lng = Model.Longitude;
+    string key = ApiKeys.googleApi;
 }
 
     <h4>Displaying Map For Customer @Html.DisplayFor(model => model.firstName)  @Html.DisplayFor(model => model.lastName)</h4>
@@ -59,8 +60,10 @@ function initMap() {
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh0UnA6dB0NIZVjMy2BCMjXd7QmR3GON4&callback=initMap">
-    </script>
+    @{ 
+        var myScriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + ApiKeys.googleApi + "&callback=initMap async defer";
+    }
+    <script src=@myScriptSrc></script>
+    
 </body>
 </html>

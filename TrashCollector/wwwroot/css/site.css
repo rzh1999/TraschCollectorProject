@@ -21,7 +21,8 @@ a.nav-link {
     transition: all .2s ease-in-out;
 }
     a.nav-link:hover {
-        transform: scale(1.1);
+        transform: scale(1.2);
+      
     }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
